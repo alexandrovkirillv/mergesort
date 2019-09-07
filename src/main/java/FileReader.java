@@ -22,41 +22,77 @@ public class FileReader {
         try {
             LineIterator it = FileUtils.lineIterator(f, "UTF-8");
             LineIterator lt = FileUtils.lineIterator(s, "UTF-8");
-            int integer = 0;
-            int integer2 = 0;
-            int counter = 0;
-
-            while (it.hasNext()) {
-
-                if (lt.hasNext()) {
-
-                    if  (integer >= integer2) {
-
-                        String str2 = lt.nextLine();
-                        integer2 = Integer.parseInt(str2);
-                        result.add(integer2);
-
-                    } else {
 
 
-                        String str = it.nextLine();
-                        integer = Integer.parseInt(str);
-                        result.add(integer);
-                    }
 
+            String str = it.nextLine();
+            int a = Integer.parseInt(str);
+            int b = 0;
+
+            int c = 0;
+            int coutA = 0;
+            int coutB = 0;
+
+
+            while ((it.hasNext()) & (lt.hasNext())) {
+
+                if (c == a) {
+
+                    str = it.next();
+                    a = Integer.parseInt(str);
+
+                    coutA++;
+
+                } else {
+                    String str2 = lt.next();
+                    b = Integer.parseInt(str2);
+
+                    coutB++;
+
+                }
+                System.out.println("==========");
+                System.out.println("a = " + a);
+                System.out.println("b = " + b);
+                if (a <= b) {
+
+                    result.add(a);
+                    c = a;
 
                 } else {
 
-                    String str = it.nextLine();
-                    integer = Integer.parseInt(str);
-                    result.add(integer);
+                    result.add(b);
+                    c = b;
+                }
+
+            }
+
+            while ((it.hasNext()) | (lt.hasNext())) {
+
+                if (!it.hasNext()) {
+                    String str2 = lt.nextLine();
+                    b = Integer.parseInt(str2);
+                    result.add(b);
+
+
+
+                } else if (!lt.hasNext()) {
+
+                    str = it.nextLine();
+                    a = Integer.parseInt(str);
+                    result.add(a);
 
 
                 }
 
-
             }
+//            else {
+//
+//                    String str = it.nextLine();
+//                    a = Integer.parseInt(str);
+//                    result.add(a);
 
+           // System.out.println("coutA = " + coutA);
+          //  System.out.println("coutB = " + coutB);
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -65,8 +101,7 @@ public class FileReader {
             e.printStackTrace();
         }
 
-        result.remove(0);
-        result.remove(0);
+         //result.remove(0);
 
         return result;
     }
