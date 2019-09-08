@@ -24,7 +24,6 @@ public class FileReader {
             LineIterator lt = FileUtils.lineIterator(s, "UTF-8");
 
 
-
             String str = it.nextLine();
             int a = Integer.parseInt(str);
             int b = 0;
@@ -71,39 +70,65 @@ public class FileReader {
                 if (!it.hasNext()) {
                     String str2 = lt.nextLine();
                     b = Integer.parseInt(str2);
+                    System.out.println("a = " + a);
+                    System.out.println("b = " + b);
+                    System.out.println("------");
+                    if (a <= b) {
+                        result.add(a);
+                        a = b;
+
+                } else {
                     result.add(b);
+                }
 
 
+            } else if (!lt.hasNext()) {
 
-                } else if (!lt.hasNext()) {
+                str = it.nextLine();
+                a = Integer.parseInt(str);
+                System.out.println("a = " + a);
+                System.out.println("b = " + b);
+                System.out.println("------");
+                if (b < a) {
+                    result.add(b);
+                    b = a;
 
-                    str = it.nextLine();
-                    a = Integer.parseInt(str);
+                } else {
                     result.add(a);
-
-
                 }
 
             }
+
+        }
+
+        if (a <= b) {
+            result.add(a);
+        }
 //            else {
 //
 //                    String str = it.nextLine();
 //                    a = Integer.parseInt(str);
 //                    result.add(a);
 
-           // System.out.println("coutA = " + coutA);
-          //  System.out.println("coutB = " + coutB);
+        // System.out.println("coutA = " + coutA);
+        //  System.out.println("coutB = " + coutB);
 
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            System.exit(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    } catch(
+    FileNotFoundException e)
 
-         //result.remove(0);
+    {
+        System.out.println("File not found");
+        System.exit(0);
+    } catch(
+    IOException e)
+
+    {
+        e.printStackTrace();
+    }
+
+    //result.remove(0);
 
         return result;
-    }
+}
 
 }
