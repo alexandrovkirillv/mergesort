@@ -13,6 +13,13 @@ public class Main {
 
         System.out.println(result);
 
+        String str = "S";
+        char [] chars = str.toCharArray() ;
+        char ch = 's';
+        int  letter = chars[0];
+
+       // System.out.println("letter is " + letter );
+
     }
 
 

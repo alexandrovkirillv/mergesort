@@ -27,11 +27,9 @@ public class FileReader {
             String str = it.nextLine();
             int a = Integer.parseInt(str);
             int b = 0;
-
             int c = 0;
-            int coutA = 0;
-            int coutB = 0;
-
+            int lastA = 0;
+            int lastB = 0;
 
             while ((it.hasNext()) & (lt.hasNext())) {
 
@@ -40,18 +38,13 @@ public class FileReader {
                     str = it.next();
                     a = Integer.parseInt(str);
 
-                    coutA++;
 
                 } else {
                     String str2 = lt.next();
                     b = Integer.parseInt(str2);
 
-                    coutB++;
-
                 }
-                System.out.println("==========");
-                System.out.println("a = " + a);
-                System.out.println("b = " + b);
+
                 if (a <= b) {
 
                     result.add(a);
@@ -63,72 +56,104 @@ public class FileReader {
                     c = b;
                 }
 
+                lastA = a;
+                lastB = b;
+
+
+
             }
 
             while ((it.hasNext()) | (lt.hasNext())) {
 
-                if (!it.hasNext()) {
-                    String str2 = lt.nextLine();
-                    b = Integer.parseInt(str2);
-                    System.out.println("a = " + a);
-                    System.out.println("b = " + b);
-                    System.out.println("------");
-                    if (a <= b) {
-                        result.add(a);
-                        a = b;
 
-                } else {
-                    result.add(b);
+                if (lt.hasNext()) {
+
+                    if (lastA <= lastB) {
+                        result.add(lastB);
+                        while (lt.hasNext()) {
+
+                            String str2 = lt.next();
+                            b = Integer.parseInt(str2);
+                            result.add(b);
+                        }
+                    } else {
+
+                        String str2 = lt.next();
+                        b = Integer.parseInt(str2);
+
+
+                        if (lastA < b) {
+
+                            result.add(lastA);
+                            while (lt.hasNext()) {
+
+                                result.add(b);
+                                str2 = lt.next();
+                                b = Integer.parseInt(str2);
+
+                            }
+                        } else {
+                            result.add(b);
+                        }
+                    }
                 }
 
+               else  {
 
-            } else if (!lt.hasNext()) {
+                    if (lastB <= lastA) {
+                        result.add(lastA);
+                        while (it.hasNext()) {
 
-                str = it.nextLine();
-                a = Integer.parseInt(str);
-                System.out.println("a = " + a);
-                System.out.println("b = " + b);
-                System.out.println("------");
-                if (b < a) {
-                    result.add(b);
-                    b = a;
+                            str = it.next();
+                            a = Integer.parseInt(str);
+                            result.add(a);
+                        }
+                    } else {
 
-                } else {
-                    result.add(a);
+                        str = it.next();
+                        a = Integer.parseInt(str);
+
+
+                        if (lastB < a) {
+
+                            result.add(lastB);
+                            while (it.hasNext()) {
+
+                                result.add(a);
+                                str = it.next();
+                                a = Integer.parseInt(str);
+
+                            }
+                        } else {
+                            result.add(a);
+                        }
+                    }
                 }
-
             }
 
+            if (lastA >= result.get(result.size() - 1)) {
+                result.add(lastA);
+            }
+            if (lastB>= result.get(result.size()-1)){
+                result.add(lastB);
+            }
+
+
+            it.close();
+            lt.close();
+
+
+
+        } catch (
+                FileNotFoundException e) {
+            System.out.println("File not found");
+            System.exit(0);
+        } catch (
+                IOException e) {
+            e.printStackTrace();
         }
-
-        if (a <= b) {
-            result.add(a);
-        }
-//            else {
-//
-//                    String str = it.nextLine();
-//                    a = Integer.parseInt(str);
-//                    result.add(a);
-
-        // System.out.println("coutA = " + coutA);
-        //  System.out.println("coutB = " + coutB);
-
-    } catch(
-    FileNotFoundException e)
-
-    {
-        System.out.println("File not found");
-        System.exit(0);
-    } catch(
-    IOException e)
-
-    {
-        e.printStackTrace();
-    }
-
-    //result.remove(0);
 
         return result;
-}
+    }
 
 }
