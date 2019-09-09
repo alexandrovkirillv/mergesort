@@ -10,14 +10,14 @@ import java.util.List;
 public class FileReader {
 
 
-    public List<Integer> readInteger(String fileName, String fileName2) {
+    public void readInteger(String fileName, String fileName2) {
 
 
         File f = new File("./src/main/resources/" + fileName);
         File s = new File("./src/main/resources/" + fileName2);
 
 
-        List<Integer> result = new ArrayList<>();
+        //List<Integer> result = new ArrayList<>();
 
         try {
             LineIterator it = FileUtils.lineIterator(f, "UTF-8");
@@ -30,6 +30,7 @@ public class FileReader {
             int c = 0;
             int lastA = 0;
             int lastB = 0;
+            Main main = new Main();
 
             while ((it.hasNext()) & (lt.hasNext())) {
 
@@ -47,12 +48,16 @@ public class FileReader {
 
                 if (a <= b) {
 
-                    result.add(a);
+                    main.write(a);
+
+                    //result.add(a);
                     c = a;
 
                 } else {
 
-                    result.add(b);
+                    main.write(b);
+
+                    //result.add(b);
                     c = b;
                 }
 
@@ -69,12 +74,17 @@ public class FileReader {
                 if (lt.hasNext()) {
 
                     if (lastA <= lastB) {
-                        result.add(lastB);
+                        main.write(lastB);
+
+                        //result.add(lastB);
                         while (lt.hasNext()) {
 
                             String str2 = lt.next();
                             b = Integer.parseInt(str2);
-                            result.add(b);
+
+                            main.write(b);
+
+                            //result.add(b);
                         }
                     } else {
 
@@ -84,16 +94,22 @@ public class FileReader {
 
                         if (lastA < b) {
 
-                            result.add(lastA);
+                            main.write(lastA);
+
+                            //result.add(lastA);
                             while (lt.hasNext()) {
 
-                                result.add(b);
+
+                                main.write(b);
+                                //result.add(b);
                                 str2 = lt.next();
                                 b = Integer.parseInt(str2);
 
                             }
                         } else {
-                            result.add(b);
+                            main.write(b);
+
+                           // result.add(b);
                         }
                     }
                 }
@@ -101,12 +117,15 @@ public class FileReader {
                else  {
 
                     if (lastB <= lastA) {
-                        result.add(lastA);
+
+                        main.write(lastA);
+                        //result.add(lastA);
                         while (it.hasNext()) {
 
                             str = it.next();
                             a = Integer.parseInt(str);
-                            result.add(a);
+                            main.write(a);
+                            //result.add(a);
                         }
                     } else {
 
@@ -116,27 +135,32 @@ public class FileReader {
 
                         if (lastB < a) {
 
-                            result.add(lastB);
+                            main.write(lastB);
+                            //result.add(lastB);
                             while (it.hasNext()) {
 
-                                result.add(a);
+                                main.write(a);
+                                //result.add(a);
                                 str = it.next();
                                 a = Integer.parseInt(str);
 
                             }
                         } else {
-                            result.add(a);
+                            main.write(a);
+                            //result.add(a);
                         }
                     }
                 }
             }
 
-            if (lastA >= result.get(result.size() - 1)) {
-                result.add(lastA);
-            }
-            if (lastB>= result.get(result.size()-1)){
-                result.add(lastB);
-            }
+//            if (lastA >= result.get(result.size() - 1)) {
+//                System.out.println(lastA);
+//               // result.add(lastA);
+//            }
+//            if (lastB>= result.get(result.size()-1)){
+//                System.out.println(lastB);
+//               // result.add(lastB);
+//            }
 
 
             it.close();
@@ -153,7 +177,6 @@ public class FileReader {
             e.printStackTrace();
         }
 
-        return result;
     }
 
 }
