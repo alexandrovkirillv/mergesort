@@ -64,9 +64,9 @@ public class FileReader {
                 lastA = a;
                 lastB = b;
 
-
-
             }
+
+
 
             while ((it.hasNext()) | (lt.hasNext())) {
 
@@ -90,24 +90,28 @@ public class FileReader {
 
                         String str2 = lt.next();
                         b = Integer.parseInt(str2);
+                        System.out.println("b = " + b);
 
 
                         if (lastA < b) {
 
                             main.write(lastA);
 
+                            main.write(b);
                             //result.add(lastA);
                             while (lt.hasNext()) {
 
-
-                                main.write(b);
                                 //result.add(b);
                                 str2 = lt.next();
                                 b = Integer.parseInt(str2);
+                                main.write(b);
 
                             }
                         } else {
                             main.write(b);
+                            if (!lt.hasNext()){
+                                main.write(lastA);
+                            }
 
                            // result.add(b);
                         }
@@ -119,13 +123,13 @@ public class FileReader {
                     if (lastB <= lastA) {
 
                         main.write(lastA);
-                        //result.add(lastA);
+
                         while (it.hasNext()) {
 
                             str = it.next();
                             a = Integer.parseInt(str);
                             main.write(a);
-                            //result.add(a);
+
                         }
                     } else {
 
@@ -136,31 +140,30 @@ public class FileReader {
                         if (lastB < a) {
 
                             main.write(lastB);
-                            //result.add(lastB);
+                            main.write(a);
+
                             while (it.hasNext()) {
 
-                                main.write(a);
-                                //result.add(a);
+
                                 str = it.next();
                                 a = Integer.parseInt(str);
+                                main.write(a);
 
                             }
                         } else {
                             main.write(a);
-                            //result.add(a);
+                            if (!it.hasNext()){
+                                main.write(lastB);
+                            }
                         }
                     }
                 }
             }
 
-//            if (lastA >= result.get(result.size() - 1)) {
-//                System.out.println(lastA);
-//               // result.add(lastA);
-//            }
-//            if (lastB>= result.get(result.size()-1)){
-//                System.out.println(lastB);
-//               // result.add(lastB);
-//            }
+
+
+            System.out.println("lastA = " + lastA);
+            System.out.println("lastB = " + lastB );
 
 
             it.close();

@@ -1,16 +1,14 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         FileReader fileReader = new FileReader();
 
         String fileName = "text1.txt";
-        String fileName2 = "test3.txt";
+        String fileName2 = "text2.txt";
 
         fileReader.readInteger(fileName, fileName2);
 
@@ -20,24 +18,42 @@ public class Main {
         char ch = 's';
         int letter = chars[0];
 
-        //write();
+        //writeFile();
 
 
         // System.out.println("letter is " + letter );
 
     }
 
-    public static void write(int i) throws FileNotFoundException {
+    public static void write(int i) throws IOException {
 
-        String outFileName = "test4.txt";
-        File file = new File("./src/main/resources/" + outFileName);
-        PrintWriter pw = new PrintWriter(file);
+        String outFileName = "out.txt";
+        //File file = new File("./src/main/resources/" + outFileName);
+        //PrintWriter pw = new PrintWriter(file);
 
-        for(int j = 0 ;)
-        pw.append(Integer.toString(i));
+        Writer output = new BufferedWriter(new FileWriter("./src/main/resources/" + outFileName, true));
 
-        pw.close();
+        System.out.println("i= " + i);
+        output.append(i + "\n");
+        output.flush();
+        output.close();
     }
+
+    public static void writeFile() throws IOException {
+
+        String outFileName = "test5.txt";
+        //File file = new File("./src/main/resources/" + outFileName);
+        //PrintWriter pw = new PrintWriter(file);
+
+        Writer output = new BufferedWriter(new FileWriter("./src/main/resources/" + outFileName, true));
+
+        for(int i = -50; i<1000; i++)
+        output.write(i + "\n");
+
+        output.close();
+    }
+
+
 
 
 }
