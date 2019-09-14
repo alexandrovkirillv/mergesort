@@ -8,7 +8,7 @@ import java.io.IOException;
 public class FileReader {
 
 
-    public void readInteger(String fileName, String fileName2, String status) {
+    public void readFile(String fileName, String fileName2, String status) {
 
 
         File f = new File("./src/main/resources/" + fileName);
@@ -27,7 +27,7 @@ public class FileReader {
             int c = 0;
             int lastNumberA = 0;
             int lastNumberB = 0;
-            Main main = new Main();
+            FileWriter fileWriter = new FileWriter();
 
             while ((fileA.hasNext()) & (fileB.hasNext())) {
 
@@ -45,13 +45,13 @@ public class FileReader {
 
                 if (numberA <= numberB) {
 
-                    main.write(numberA);
+                    fileWriter.write(numberA);
 
                     c = numberA;
 
                 } else {
 
-                    main.write(numberB);
+                    fileWriter.write(numberB);
 
                     c = numberB;
                 }
@@ -68,14 +68,14 @@ public class FileReader {
                 if (fileB.hasNext()) {
 
                     if (lastNumberA <= lastNumberB) {
-                        main.write(lastNumberB);
+                        fileWriter.write(lastNumberB);
 
                         while (fileB.hasNext()) {
 
                             String strB = fileB.next();
                             numberB = checkInType(strB, status);
 
-                            main.write(numberB);
+                            fileWriter.write(numberB);
 
 
                         }
@@ -87,21 +87,21 @@ public class FileReader {
 
                         if (lastNumberA < numberB) {
 
-                            main.write(lastNumberA);
+                            fileWriter.write(lastNumberA);
 
-                            main.write(numberB);
+                            fileWriter.write(numberB);
 
                             while (fileB.hasNext()) {
 
                                 strB = fileB.next();
                                 numberB = checkInType(strB, status);
-                                main.write(numberB);
+                                fileWriter.write(numberB);
 
                             }
                         } else {
-                            main.write(numberB);
+                            fileWriter.write(numberB);
                             if (!fileB.hasNext()) {
-                                main.write(lastNumberA);
+                                fileWriter.write(lastNumberA);
                             }
 
                         }
@@ -110,13 +110,13 @@ public class FileReader {
 
                     if (lastNumberB <= lastNumberA) {
 
-                        main.write(lastNumberA);
+                        fileWriter.write(lastNumberA);
 
                         while (fileA.hasNext()) {
 
                             strA = fileA.next();
                             numberA = checkInType(strA, status);
-                            main.write(numberA);
+                            fileWriter.write(numberA);
 
                         }
                     } else {
@@ -127,21 +127,21 @@ public class FileReader {
 
                         if (lastNumberB < numberA) {
 
-                            main.write(lastNumberB);
-                            main.write(numberA);
+                            fileWriter.write(lastNumberB);
+                            fileWriter.write(numberA);
 
                             while (fileA.hasNext()) {
 
 
                                 strA = fileA.next();
                                 numberA = checkInType(strA, status);
-                                main.write(numberA);
+                                fileWriter.write(numberA);
 
                             }
                         } else {
-                            main.write(numberA);
+                            fileWriter.write(numberA);
                             if (!fileA.hasNext()) {
-                                main.write(lastNumberB);
+                                fileWriter.write(lastNumberB);
                             }
                         }
                     }
@@ -162,7 +162,7 @@ public class FileReader {
 
     }
 
-    public int checkInType(String string, String status) {
+    private int checkInType(String string, String status) {
 
         int fin = 0;
 
