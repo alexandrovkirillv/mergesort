@@ -90,7 +90,7 @@ public class FileReader {
 
                         String str2 = lt.next();
                         b = Integer.parseInt(str2);
-                        System.out.println("b = " + b);
+
 
 
                         if (lastA < b) {
@@ -162,8 +162,7 @@ public class FileReader {
 
 
 
-            System.out.println("lastA = " + lastA);
-            System.out.println("lastB = " + lastB );
+
 
 
             it.close();
