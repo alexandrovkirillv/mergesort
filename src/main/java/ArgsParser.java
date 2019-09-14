@@ -2,11 +2,11 @@ import org.apache.commons.cli.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class ArgsParser {
 
     String outFileName;
+    String status;
     List<String> inFiles = new ArrayList<>();
 
     public String getOutFileName() {
@@ -33,6 +33,10 @@ public class ArgsParser {
     }
 
 
+    public String getStatus() {
+        return status;
+    }
+
     public void argsSet(CommandLine cmd, String[] args ) {
 
 
@@ -41,12 +45,12 @@ public class ArgsParser {
         String maskForOutFiles = "out.+?txt";
 
         if (cmd.hasOption("i")) {
-            System.out.println("Integer");
+            status="int";
         }
 
         if (cmd.hasOption("s")) {
 
-            System.out.println("String");
+           status="string";
 
         }
 
@@ -74,7 +78,7 @@ public class ArgsParser {
             if (a.matches(maskForOutFiles)){
 
                 outFileName= a;
-                System.out.println("out = " + a);
+
 
             }
 

@@ -4,171 +4,152 @@ import org.apache.commons.io.LineIterator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileReader {
 
 
-    public void readInteger(String fileName, String fileName2) {
+    public void readInteger(String fileName, String fileName2, String status) {
 
 
         File f = new File("./src/main/resources/" + fileName);
         File s = new File("./src/main/resources/" + fileName2);
 
 
-        //List<Integer> result = new ArrayList<>();
-
         try {
-            LineIterator it = FileUtils.lineIterator(f, "UTF-8");
-            LineIterator lt = FileUtils.lineIterator(s, "UTF-8");
+            LineIterator fileA = FileUtils.lineIterator(f, "UTF-8");
+            LineIterator fileB = FileUtils.lineIterator(s, "UTF-8");
 
 
-            String str = it.nextLine();
-            int a = Integer.parseInt(str);
-            int b = 0;
+            String strA = fileA.nextLine();
+
+            int numberA = checkInType(strA, status);
+            int numberB = 0;
             int c = 0;
-            int lastA = 0;
-            int lastB = 0;
+            int lastNumberA = 0;
+            int lastNumberB = 0;
             Main main = new Main();
 
-            while ((it.hasNext()) & (lt.hasNext())) {
+            while ((fileA.hasNext()) & (fileB.hasNext())) {
 
-                if (c == a) {
+                if (c == numberA) {
 
-                    str = it.next();
-                    a = Integer.parseInt(str);
+                    strA = fileA.next();
+                    numberA = checkInType(strA, status);
 
 
                 } else {
-                    String str2 = lt.next();
-                    b = Integer.parseInt(str2);
+                    String strB = fileB.next();
+                    numberB = checkInType(strB, status);
 
                 }
 
-                if (a <= b) {
+                if (numberA <= numberB) {
 
-                    main.write(a);
+                    main.write(numberA);
 
-                    //result.add(a);
-                    c = a;
+                    c = numberA;
 
                 } else {
 
-                    main.write(b);
+                    main.write(numberB);
 
-                    //result.add(b);
-                    c = b;
+                    c = numberB;
                 }
 
-                lastA = a;
-                lastB = b;
+                lastNumberA = numberA;
+                lastNumberB = numberB;
 
             }
 
 
+            while ((fileA.hasNext()) | (fileB.hasNext())) {
 
-            while ((it.hasNext()) | (lt.hasNext())) {
+
+                if (fileB.hasNext()) {
+
+                    if (lastNumberA <= lastNumberB) {
+                        main.write(lastNumberB);
+
+                        while (fileB.hasNext()) {
+
+                            String strB = fileB.next();
+                            numberB = checkInType(strB, status);
+
+                            main.write(numberB);
 
 
-                if (lt.hasNext()) {
-
-                    if (lastA <= lastB) {
-                        main.write(lastB);
-
-                        //result.add(lastB);
-                        while (lt.hasNext()) {
-
-                            String str2 = lt.next();
-                            b = Integer.parseInt(str2);
-
-                            main.write(b);
-
-                            //result.add(b);
                         }
                     } else {
 
-                        String str2 = lt.next();
-                        b = Integer.parseInt(str2);
+                        String strB = fileB.next();
+                        numberB = checkInType(strB, status);
 
 
+                        if (lastNumberA < numberB) {
 
-                        if (lastA < b) {
+                            main.write(lastNumberA);
 
-                            main.write(lastA);
+                            main.write(numberB);
 
-                            main.write(b);
-                            //result.add(lastA);
-                            while (lt.hasNext()) {
+                            while (fileB.hasNext()) {
 
-                                //result.add(b);
-                                str2 = lt.next();
-                                b = Integer.parseInt(str2);
-                                main.write(b);
+                                strB = fileB.next();
+                                numberB = checkInType(strB, status);
+                                main.write(numberB);
 
                             }
                         } else {
-                            main.write(b);
-                            if (!lt.hasNext()){
-                                main.write(lastA);
+                            main.write(numberB);
+                            if (!fileB.hasNext()) {
+                                main.write(lastNumberA);
                             }
 
-                           // result.add(b);
                         }
                     }
-                }
+                } else {
 
-               else  {
+                    if (lastNumberB <= lastNumberA) {
 
-                    if (lastB <= lastA) {
+                        main.write(lastNumberA);
 
-                        main.write(lastA);
+                        while (fileA.hasNext()) {
 
-                        while (it.hasNext()) {
-
-                            str = it.next();
-                            a = Integer.parseInt(str);
-                            main.write(a);
+                            strA = fileA.next();
+                            numberA = checkInType(strA, status);
+                            main.write(numberA);
 
                         }
                     } else {
 
-                        str = it.next();
-                        a = Integer.parseInt(str);
+                        strA = fileA.next();
+                        numberA = checkInType(strA, status);
 
 
-                        if (lastB < a) {
+                        if (lastNumberB < numberA) {
 
-                            main.write(lastB);
-                            main.write(a);
+                            main.write(lastNumberB);
+                            main.write(numberA);
 
-                            while (it.hasNext()) {
+                            while (fileA.hasNext()) {
 
 
-                                str = it.next();
-                                a = Integer.parseInt(str);
-                                main.write(a);
+                                strA = fileA.next();
+                                numberA = checkInType(strA, status);
+                                main.write(numberA);
 
                             }
                         } else {
-                            main.write(a);
-                            if (!it.hasNext()){
-                                main.write(lastB);
+                            main.write(numberA);
+                            if (!fileA.hasNext()) {
+                                main.write(lastNumberB);
                             }
                         }
                     }
                 }
             }
 
-
-
-
-
-
-            it.close();
-            lt.close();
-
-
+            fileA.close();
+            fileB.close();
 
         } catch (
                 FileNotFoundException e) {
@@ -180,5 +161,32 @@ public class FileReader {
         }
 
     }
+
+    public int checkInType(String string, String status) {
+
+        int fin = 0;
+
+        if (status.equals("int")) {
+
+            try {
+                fin = Integer.parseInt(string);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong format");
+            }
+
+
+        } else if (status.equals("string")) {
+
+            try {
+                fin = string.charAt(0);
+            } catch (NumberFormatException e) {
+                System.out.println("Wrong format");
+            }
+
+        }
+
+        return fin;
+    }
+
 
 }

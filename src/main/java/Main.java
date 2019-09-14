@@ -1,68 +1,58 @@
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.ParseException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Main {
 
     public static String outFileName;
+    public static FileReader fileReader = new FileReader();
+    public static String status;
+    public static List<String> inFiles = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws ParseException {
 
         ArgsParser argsParser = new ArgsParser();
 
         argsParser.parseArgs(args);
         outFileName = argsParser.getOutFileName();
+        status = argsParser.getStatus();
+        inFiles = argsParser.getInFiles();
 
-        FileReader fileReader = new FileReader();
-
-        String fileName = "text1.txt";
-        String fileName2 = "text2.txt";
-
-        fileReader.readInteger(fileName, fileName2);
-
-
-        String str = "S";
-        char[] chars = str.toCharArray();
-        char ch = 's';
-        int letter = chars[0];
-
-
-        //writeFile();
-
-
-        // System.out.println("letter is " + letter );
+        fileReader.readInteger(inFiles.get(0), inFiles.get(1), status);
 
     }
 
     public static void write(int i) throws IOException {
 
-
-        //File file = new File("./src/main/resources/" + outFileName);
-        //PrintWriter pw = new PrintWriter(file);
-
         Writer output = new BufferedWriter(new FileWriter("./src/main/resources/" + outFileName, true));
 
-        output.append(i + "\n");
+        String string = checkInTypeToWrite(i) ;
+        output.append(string + "\n");
         output.flush();
         output.close();
 
     }
 
-    public static void writeFile() throws IOException {
+    public static String checkInTypeToWrite(int i) {
 
-        String outFileName = "test5.txt";
-        //File file = new File("./src/main/resources/" + outFileName);
-        //PrintWriter pw = new PrintWriter(file);
+        String s;
+        if (status.equals("string")) {
 
-        Writer output = new BufferedWriter(new FileWriter("./src/main/resources/" + outFileName, true));
+            char c = (char) i;
+            s = Character.toString(c);
 
-        for (int i = -50; i < 1000; i++)
-            output.write(i + "\n");
+        } else {
 
-        output.close();
+            s = String.valueOf(i);
+
+        }
+
+        return s;
     }
 
 
