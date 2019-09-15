@@ -38,10 +38,9 @@ public class FileWriter {
 
         if (statusOfSort.equals("dec")) {
             descendingWriteToOutFile("temp.txt", main.getOutFileName());
-            eraseFile("temp.txt");
+
         } else if (statusOfSort.equals("asc")) {
             ascendingWriteToOutFile("temp.txt", main.getOutFileName());
-            eraseFile("temp.txt");
         }
 
     }
@@ -50,13 +49,13 @@ public class FileWriter {
 
 
         try {
-            ReversedLinesFileReader fileA = new ReversedLinesFileReader(new File( inFileName), Charset.defaultCharset());
-            PrintWriter printWriter = new PrintWriter(new File( outFileName));
+            ReversedLinesFileReader fileA = new ReversedLinesFileReader(new File(inFileName), Charset.defaultCharset());
+            PrintWriter printWriter = new PrintWriter(new File(outFileName));
             String string;
 
             while ((string = fileA.readLine()) != null) {
 
-                printWriter.write(string + "\n");
+                printWriter.write(string + " \n");
 
 
             }
@@ -66,7 +65,7 @@ public class FileWriter {
             printWriter.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found"+ inFileName);
+            System.out.println("File not found" + inFileName);
             System.exit(0);
 
         } catch (NullPointerException e) {
@@ -85,14 +84,14 @@ public class FileWriter {
         String string;
         try {
             LineIterator fileA = FileUtils.lineIterator(new File(inFileName), "UTF-8");
-            PrintWriter printWriter = new PrintWriter(new File( outFileName));
+            PrintWriter printWriter = new PrintWriter(new File(outFileName));
 
 
             while (fileA.hasNext()) {
 
                 string = fileA.nextLine();
 
-                printWriter.write(string + "\n");
+                printWriter.write(string + " \n");
 
             }
 
@@ -143,6 +142,7 @@ public class FileWriter {
 
             ascendingWriteToOutFile("temp.txt", main.getOutFileName());
 
+            eraseFile("temp.txt");
         }
 
     }
