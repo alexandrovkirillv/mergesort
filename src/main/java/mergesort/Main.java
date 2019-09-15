@@ -47,6 +47,7 @@ public class Main {
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
 
+        fileWriter.eraseFile(outFileName);
         for (String l : inFiles) {
 
             fileReader.readFile(outFileName, l, statusOfSort, statusOfType);

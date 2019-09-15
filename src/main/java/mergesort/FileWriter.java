@@ -50,7 +50,7 @@ public class FileWriter {
 
         try {
             ReversedLinesFileReader fileA = new ReversedLinesFileReader(new File(inFileName), Charset.defaultCharset());
-            PrintWriter printWriter = new PrintWriter(new File(outFileName));
+            Writer printWriter = new PrintWriter(new File(outFileName));
             String string;
 
             while ((string = fileA.readLine()) != null) {
@@ -84,7 +84,7 @@ public class FileWriter {
         String string;
         try {
             LineIterator fileA = FileUtils.lineIterator(new File(inFileName), "UTF-8");
-            PrintWriter printWriter = new PrintWriter(new File(outFileName));
+            Writer printWriter = new PrintWriter(new File(outFileName));
 
 
             while (fileA.hasNext()) {
