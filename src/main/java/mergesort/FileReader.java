@@ -178,7 +178,7 @@ public class FileReader {
                             if (previousA > currentA) {
 
                                 currentA = previousA;
-                                System.out.println("=======");
+
                                 break;
 
                             }
@@ -193,7 +193,7 @@ public class FileReader {
                         currentA = checkInType(strA, statusOfType);
 
                         if (previousA > currentA) {
-                            System.out.println("========");
+
                             break;
                         }
 
@@ -263,8 +263,6 @@ public class FileReader {
             }
 
             String currentStrA = tempA;
-            System.out.println("tempA = " + tempA);
-            System.out.println("tempB = " + tempB);
             String currentStrB = tempB;
             int currentA = checkInType(currentStrA, statusOfType);
             int currentB = checkInType(currentStrB, statusOfType);

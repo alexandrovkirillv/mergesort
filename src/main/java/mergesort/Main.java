@@ -1,8 +1,5 @@
 package mergesort;
 
-import mergesort.ArgsParser;
-import mergesort.FileReader;
-import mergesort.FileWriter;
 import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
@@ -53,7 +50,7 @@ public class Main {
         for (String l : inFiles) {
 
             fileReader.readFile(outFileName, l, statusOfSort, statusOfType);
-            fileWriter.writeToOutFite(statusOfSort);
+            fileWriter.writeToOutFile(statusOfSort);
             fileWriter.eraseFile("temp.txt");
         }
 

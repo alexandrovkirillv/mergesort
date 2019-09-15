@@ -34,12 +34,14 @@ public class FileWriter {
 
     }
 
-    public void writeToOutFite(String statusOfSort) throws IOException {
+    public void writeToOutFile(String statusOfSort) throws IOException {
 
         if (statusOfSort.equals("dec")) {
             descendingWriteToOutFile("temp.txt", main.getOutFileName());
+            eraseFile("temp.txt");
         } else if (statusOfSort.equals("asc")) {
             ascendingWriteToOutFile("temp.txt", main.getOutFileName());
+            eraseFile("temp.txt");
         }
 
     }
@@ -136,7 +138,7 @@ public class FileWriter {
 
 
         if (statusOfSort.equals("dec")) {
-            System.out.println("hell");
+
             descendingWriteToOutFile(main.getOutFileName(), "temp.txt");
 
             ascendingWriteToOutFile("temp.txt", main.getOutFileName());
