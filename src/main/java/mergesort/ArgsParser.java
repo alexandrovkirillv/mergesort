@@ -1,3 +1,5 @@
+package mergesort;
+
 import org.apache.commons.cli.*;
 
 import java.util.ArrayList;
@@ -5,9 +7,10 @@ import java.util.List;
 
 public class ArgsParser {
 
-    String outFileName;
-    String status;
-    List<String> inFiles = new ArrayList<>();
+    private String outFileName;
+    private String statusOfType;
+    private String statusOfSort;
+    private List<String> inFiles = new ArrayList<>();
 
     public String getOutFileName() {
         return outFileName;
@@ -28,65 +31,67 @@ public class ArgsParser {
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
-        argsSet(cmd,args);
+        argsSet(cmd, args);
 
     }
 
 
-    public String getStatus() {
-        return status;
+    public String getStatusOfSort() {
+        return statusOfSort;
     }
 
-    public void argsSet(CommandLine cmd, String[] args ) {
+    public String getStatusOfType() {
+        return statusOfType;
+    }
 
+    public void argsSet(CommandLine cmd, String[] args) {
 
 
         String maskForInFiles = "in.+?txt";
         String maskForOutFiles = "out.+?txt";
 
         if (cmd.hasOption("i")) {
-            status="int";
+            statusOfType = "int";
         }
 
         if (cmd.hasOption("s")) {
 
-           status="string";
+            statusOfType = "string";
 
         }
 
         if (cmd.hasOption("a")) {
 
-            System.out.println("ascending sort");
+            statusOfSort = "asc";
 
         }
 
         if (cmd.hasOption("d")) {
 
-            System.out.println("descending sort");
+            statusOfSort = "dec";
 
         }
 
+        if ((!cmd.hasOption("a")) & (!cmd.hasOption("d"))) {
 
-        for (String a : args){
+            statusOfSort = "asc";
+        }
 
-            if(a.matches(maskForInFiles)){
+
+        for (String a : args) {
+
+            if (a.matches(maskForInFiles)) {
 
                 inFiles.add(a);
-                System.out.println("in = " + a);
 
             }
-            if (a.matches(maskForOutFiles)){
+            if (a.matches(maskForOutFiles)) {
 
-                outFileName= a;
-
+                outFileName = a;
 
             }
 
         }
-
-
-
-
 
     }
 
