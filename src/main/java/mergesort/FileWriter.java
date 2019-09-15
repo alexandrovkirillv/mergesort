@@ -19,7 +19,7 @@ public class FileWriter {
         String string = checkInTypeToWrite(i);
 
         output.append(string);
-        output.append(" \n");
+        output.append("\n");
         output.flush();
         output.close();
 
@@ -55,7 +55,7 @@ public class FileWriter {
 
             while ((string = fileA.readLine()) != null) {
 
-                printWriter.write(string + " \n");
+                printWriter.write(string + "\n");
 
 
             }
