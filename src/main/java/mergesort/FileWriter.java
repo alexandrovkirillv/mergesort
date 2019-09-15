@@ -14,12 +14,12 @@ public class FileWriter {
     public void write(int i) throws IOException {
 
 
-        Writer output = new BufferedWriter(new java.io.FileWriter("temp.txt", true));
+        Writer output = new PrintWriter(new java.io.FileWriter("temp.txt", true));
 
         String string = checkInTypeToWrite(i);
 
-        output.write(string);
-        output.write("\n");
+        output.append(string);
+        output.append(" \n");
         output.flush();
         output.close();
 
